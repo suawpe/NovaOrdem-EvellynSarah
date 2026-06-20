@@ -17,7 +17,6 @@ import giftCafeteira from "@/assets/gift-cafeteira.jpg";
 import giftTacas from "@/assets/gift-tacas.jpg";
 import luanBg from "@/assets/luan-bg.jpg";
 import rosas from "@/assets/rosas.png";
-import { Switch } from "@/components/ui/switch";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -310,8 +309,8 @@ function Guia() {
     { n: "05", t: "Confirmação", d: "Confirme sua presença até 30 de outubro de 2026 através do formulário." },
   ];
   const menu = {
-    gastronomia: ["Churrasco Gourmet", "Sushi & Sashimi", "Risotos Autorais", "Cortes Frios e Queijos"],
-    sobremesas: ["Açaí", "Sorvete", "Pudim", "Mousse de Maracujá", "Bem-casados"],
+    gastronomia: ["Churrasco Gourmet", "Sushi & Sashimi", "Ilha de Risoto", "Cortes Frios e Queijos"],
+    sobremesas: ["Açaí", "Sorvete", "Pudim", "Mousse de Maracujá", "Bem-casados", "Doceria Gourmet"],
   };
 
   return (
@@ -447,7 +446,7 @@ function Luan() {
             {[
               { l: "Início", v: "22h30" },
               { l: "Duração", v: "90 min" },
-              { l: "Local", v: "Pavilhão Glass" },
+              { l: "Local", v: "Pavilhão Glass - Centro da Fazenda" },
             ].map((i) => (
               <div key={i.l} className="bg-primary px-4 py-5">
                 <p className="label-eyebrow text-primary-foreground/50">{i.l}</p>
@@ -571,7 +570,7 @@ function Endereco() {
                   type="submit"
                   className="label-eyebrow mt-6 w-full bg-primary py-5 text-primary-foreground transition-opacity hover:opacity-90"
                 >
-                  Confirmar Presença
+                  Confirmar Endereço
                 </button>
               </form>
             )}
@@ -606,7 +605,6 @@ const FILTERS: { id: "todos" | GiftCategory; label: string }[] = [
 ];
 
 function Boutique() {
-  const [expired, setExpired] = useState(false);
   const [filter, setFilter] = useState<"todos" | GiftCategory>("todos");
   const [selected, setSelected] = useState<Gift | null>(null);
   const [step, setStep] = useState<"detail" | "pix">("detail");
@@ -618,7 +616,6 @@ function Boutique() {
   );
 
   const open = (g: Gift) => {
-    if (expired) return;
     setSelected(g);
     setStep("detail");
   };
@@ -635,22 +632,6 @@ function Boutique() {
             <p className="mt-5 max-w-xl text-sm leading-relaxed text-foreground/70">
               Sem listas de loja, sem talheres. Aqui, cada presente vira uma memória — e cada memória, parte da nossa vida a dois.
             </p>
-          </div>
-
-          <div className="flex shrink-0 items-center gap-3 border border-primary/30 bg-card px-4 py-3 sm:gap-4 sm:px-5">
-            <label
-              htmlFor="boutique-expired-toggle"
-              className="label-eyebrow cursor-pointer select-none whitespace-nowrap text-foreground/70"
-            >
-              Simular Expiração
-            </label>
-            <Switch
-              id="boutique-expired-toggle"
-              checked={expired}
-              onCheckedChange={setExpired}
-              aria-label="Simular expiração da boutique de presentes"
-              className="shrink-0 data-[state=checked]:bg-primary data-[state=unchecked]:bg-foreground/20 [&_span]:bg-card"
-            />
           </div>
         </header>
 
@@ -679,45 +660,34 @@ function Boutique() {
           </span>
         </div>
 
-        <div className="relative">
-          {expired && (
-            <div className="pointer-events-none absolute inset-0 z-20 flex items-center justify-center bg-background/85 backdrop-blur-sm">
-              <div className="border border-primary/30 bg-card px-10 py-8 text-center">
-                <p className="script text-3xl text-primary">Período encerrado</p>
-                <p className="mt-2 text-sm text-foreground/70">A boutique de presentes foi encerrada após o casamento.</p>
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {visible.map((g) => (
+            <article key={g.title} className="group flex flex-col bg-card">
+              <div className="relative aspect-[3/4] overflow-hidden bg-muted">
+                <img src={g.img} alt={g.title} loading="lazy" width={768} height={1024} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                <span className="absolute left-4 top-4 label-eyebrow bg-card/90 px-3 py-1.5 text-primary backdrop-blur">
+                  {g.tag}
+                </span>
               </div>
-            </div>
-          )}
-
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {visible.map((g) => (
-              <article key={g.title} className="group flex flex-col bg-card">
-                <div className="relative aspect-[3/4] overflow-hidden bg-muted">
-                  <img src={g.img} alt={g.title} loading="lazy" width={768} height={1024} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
-                  <span className="absolute left-4 top-4 label-eyebrow bg-card/90 px-3 py-1.5 text-primary backdrop-blur">
-                    {g.tag}
-                  </span>
-                </div>
-                <div className="flex flex-1 flex-col p-6">
-                  <h3 className="font-serif text-2xl text-foreground">{g.title}</h3>
-                  <p className="mt-2 text-xs text-foreground/60">Contribuição simbólica para nossa lua de mel e primeiros capítulos.</p>
-                  <div className="mt-auto flex items-end justify-between pt-6">
-                    <div>
-                      <p className="label-eyebrow text-foreground/50">A partir de</p>
-                      <p className="font-serif text-xl text-primary">R$ {g.price.toLocaleString("pt-BR")}</p>
-                    </div>
-                    <button
-                      type="button"
-                      onClick={() => open(g)}
-                      className="label-eyebrow text-primary transition-opacity hover:opacity-70"
-                    >
-                      Presentear →
-                    </button>
+              <div className="flex flex-1 flex-col p-6">
+                <h3 className="font-serif text-2xl text-foreground">{g.title}</h3>
+                <p className="mt-2 text-xs text-foreground/60">Contribuição simbólica para nossa lua de mel e primeiros capítulos.</p>
+                <div className="mt-auto flex items-end justify-between pt-6">
+                  <div>
+                    <p className="label-eyebrow text-foreground/50">A partir de</p>
+                    <p className="font-serif text-xl text-primary">R$ {g.price.toLocaleString("pt-BR")}</p>
                   </div>
+                  <button
+                    type="button"
+                    onClick={() => open(g)}
+                    className="label-eyebrow text-primary transition-opacity hover:opacity-70"
+                  >
+                    Presentear →
+                  </button>
                 </div>
-              </article>
-            ))}
-          </div>
+              </div>
+            </article>
+          ))}
         </div>
       </ScrollReveal>
 
