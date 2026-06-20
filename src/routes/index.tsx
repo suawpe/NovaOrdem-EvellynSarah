@@ -297,10 +297,10 @@ function Timeline() {
 function Guia() {
   const palette = [
     { n: "Navy", h: "#0D1F4F" },
-    { n: "Royal", h: "#1E3FB0" },
+    { n: "Serenity", h: "#A2B9CE" },
     { n: "Slate", h: "#5C7AB5" },
     { n: "Soft Gray", h: "#C7CCD4" },
-    { n: "White", h: "#F4F6F9" },
+    { n: "Ice Blue", h: "#E3EBEE" },
   ];
   const protocols = [
     { n: "01", t: "Pontualidade", d: "A cerimônia inicia exatamente às 17h00. Chegada sugerida a partir das 16h15." },
@@ -311,7 +311,7 @@ function Guia() {
   ];
   const menu = {
     gastronomia: ["Churrasco Gourmet", "Sushi & Sashimi", "Risotos Autorais", "Cortes Frios e Queijos"],
-    sobremesas: ["Mousse de Chocolate Belga", "Petit Gâteau", "Frutas da Estação", "Café de Especialidade"],
+    sobremesas: ["Açaí", "Sorvete", "Pudim", "Mousse de Maracujá", "Bem-casados"],
   };
 
   return (
