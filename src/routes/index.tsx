@@ -334,7 +334,7 @@ function Guia() {
               <p className="label-eyebrow text-primary">Dress Code</p>
               <h3 className="mt-3 font-serif text-3xl text-foreground md:text-4xl">Esporte Fino · Passeio</h3>
               <p className="mt-5 text-sm leading-relaxed text-foreground/70">
-                Pense em tecidos leves, alfaiataria com toque de informalidade e cores que conversem com o céu — sem regras rígidas, com elegância.
+                Pense em tecidos leves, alfaiataria com toque de informalidade e cores que conversem com o céu — apenas uma única restrição: proibido o uso de trajes nas cores Branco e Azul Royal.
               </p>
               <div className="mt-10">
                 <p className="label-eyebrow text-foreground/60">Paleta Sugerida</p>
@@ -439,9 +439,10 @@ function Luan() {
 
       <ScrollReveal className="relative z-10 mx-auto grid max-w-[1400px] grid-cols-12 gap-10 px-6 py-24 md:px-12 md:py-32">
         <div className="col-span-12 lg:col-span-7">
-          <p className="label-eyebrow text-primary-foreground/60">Atração Especial · Convite VIP</p>
+          <p className="label-eyebrow text-primary-foreground/60">Atração Confirmada!</p>
           <h2 className="mt-6 font-serif text-5xl leading-[0.95] md:text-8xl">Luan<br />Santana</h2>
           <p className="mt-6 font-serif text-2xl italic text-primary-foreground/80">— AO VIVO —</p>
+          
           <div className="mt-10 grid grid-cols-1 gap-px bg-primary-foreground/15 sm:grid-cols-3">
             {[
               { l: "Início", v: "22h30" },
@@ -453,6 +454,29 @@ function Luan() {
                 <p className="mt-2 font-serif text-xl">{i.v}</p>
               </div>
             ))}
+          </div>
+
+          {/* NOVO: Biografia & Informações */}
+          <div className="mt-12 space-y-4 max-w-xl">
+            <h3 className="label-eyebrow text-primary-foreground/70 tracking-wider">Sobre o Artista</h3>
+            <p className="text-base leading-relaxed text-primary-foreground/80">
+              Fenômeno da música brasileira, Luan Santana traz para o palco do Pavilhão Glass uma turnê histórica. 
+              Com mais de 15 anos de carreira e colecionando recordes no topo das paradas, o artista promete uma 
+              experiência inesquecível combinando seus maiores clássicos românticos aos hits mais recentes do sertanejo pop.
+            </p>
+          </div>
+
+          {/* NOVO: Setlist / Músicas confirmadas */}
+          <div className="mt-12">
+            <h3 className="label-eyebrow text-primary-foreground/70 tracking-wider mb-4">Setlist Confirmado</h3>
+            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-primary-foreground/90 font-serif text-lg italic">
+              <li>🎵 Meteoro</li>
+              <li>🎵 Morena</li>
+              <li>🎵 Coração Cigano</li>
+              <li>🎵 Amar não é Pecado</li>
+              <li>🎵 Quando a Bad Bater</li>
+              <li>🎵 Escreve Aí</li>
+            </ul>
           </div>
         </div>
 
@@ -492,8 +516,7 @@ function Luan() {
     </section>
   );
 }
-
-/* ---------- RSVP ---------- */
+/* ---------- Convite ---------- */
 function Endereco() {
   const [submitted, setSubmitted] = useState(false);
   return (
